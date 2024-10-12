@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta de Acceso a Cuenta de Instagram</title>
+    <style>
+        /* Estilo general */
+        body {
+            background-color: #1e1e1e; /* Fondo oscuro */
+            color: #ffffff; /* Texto blanco */
+            font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+            font-size: 16px; /* Tamaño de fuente */
+            padding: 20px; /* Espaciado */
+            margin: 0; /* Sin margen */
+            overflow: hidden; /* Sin desplazamiento */
+        }
+
+        h1 {
+            color: #00ccff; /* Azul claro */
+            text-align: center; /* Centramos el título */
+            margin-bottom: 20px; /* Margen inferior */
+            text-shadow: 0 0 10px #00ccff; /* Sombra de texto */
+        }
+
+        #hackText {
+            background-color: #2c2c2c; /* Fondo de caja */
+            color: #ffffff; /* Texto blanco */
+            border: 1px solid #00ccff; /* Borde azul claro */
+            padding: 10px; /* Espaciado interno */
+            height: 300px; /* Altura fija */
+            overflow: hidden; /* Sin desplazamiento */
+            white-space: pre-wrap; /* Respeta saltos de línea */
+        }
+
+        /* Barra de progreso */
+        .progress-bar {
+            width: 100%; /* Barra completa */
+            background-color: #444; /* Fondo de barra */
+            border: 1px solid #00ccff; /* Borde azul claro */
+            margin: 20px 0; /* Margen */
+            height: 20px; /* Altura de barra */
+        }
+
+        .progress {
+            width: 0; /* Ancho inicial */
+            height: 100%; /* Altura completa */
+            background-color: #00ccff; /* Color de barra */
+            animation: loading 10s linear forwards; /* Animación */
+        }
+
+        @keyframes loading {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Estilos de entrada */
+        input, button {
+            font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+            font-size: 16px; /* Tamaño de fuente */
+            padding: 10px; /* Espaciado interno */
+            background-color: #333; /* Fondo oscuro */
+            color: #00ccff; /* Texto azul claro */
+            border: 1px solid #00ccff; /* Borde azul claro */
+            margin: 10px 0; /* Margen */
+            width: 100%; /* Ancho completo */
+        }
+
+        button:hover {
+            background-color: #00ccff; /* Color al pasar el ratón */
+            color: #000; /* Texto negro al pasar el ratón */
+        }
+
+        #inputSection {
+            margin-bottom: 20px; /* Margen inferior */
+        }
+
+        /* Animación de escritura */
+        .typewriter {
+            display: inline-block; /* Mostrar en línea */
+            border-right: 2px solid #00ccff; /* Línea de escritura */
+            white-space: nowrap; /* Sin salto de línea */
+            overflow: hidden; /* Sin desbordamiento */
+            animation: typing 0.5s steps(30, end) forwards; /* Animación de escritura */
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Herramienta de Acceso a Cuenta de Instagram</h1>
+
+    <div id="inputSection">
+        <label for="username">Introduce el nombre de usuario de Instagram:</label><br>
+        <input type="text" id="username" placeholder="@usuario"><br>
+        <button onclick="startHack()">Iniciar Acceso</button>
+    </div>
+
+    <div id="hackText"></div>
+
+    <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+    </div>
+
+    <script>
+        let username = "";
+        let currentMessage = 0;
+
+        const messages = [
+            "Iniciando escaneo del sistema para el usuario '@username'...\n",
+            "Estableciendo conexión segura con el servidor de Instagram...\n",
+            "Verificando configuraciones del firewall para '@username'...\n",
+            "Escaneando puertos en los servidores de Instagram para '@username'...\n",
+            "Puertos abiertos encontrados: 80, 443, 8080\n",
+            "Eliminando protocolos de seguridad para '@username'...\n",
+            "Desencriptando tráfico SSL/TLS para '@username'...\n",
+            "Inyectando comandos SQL en la base de datos...\n",
+            "Recuperando credenciales para el usuario '@username'...\n",
+            "Nombre de usuario '@username' encontrado en la base de datos.\n",
+            "Desencriptando la contraseña para '@username'...\n",
+            "La contraseña para '@username' es: ************\n",
+            "Simulando acceso a la cuenta de '@username'...\n",
+            "Acceso completo para '@username'. Preparando para revelar credenciales.\n",
+            "!!! ERROR: SOBREVOLCANIZACIÓN DEL SISTEMA DETECTADA !!!\n",
+            "!! Advertencia: Actividad no autorizada detectada !!\n",
+            "¡Oops! ¡Has sido víctima de una broma! Esto fue solo una broma. 😄\n"
+        ];
+
+        function startHack() {
+            username = document.getElementById("username").value;
+            if (username === "") {
+                alert("Por favor, introduce un nombre de usuario.");
+                return;
+            }
+
+            // Ocultar el formulario
+            document.getElementById("inputSection").style.display = "none";
+            document.getElementById("progress").style.display = "block"; // Mostrar barra de progreso
+
+            setTimeout(showNextMessage, 2000); // Comenzar a mostrar los mensajes después de 2 segundos
+        }
+
+        function showNextMessage() {
+            if (currentMessage < messages.length) {
+                const hackTextDiv = document.getElementById("hackText");
+
+                // Reemplazar '@username' con el nombre ingresado por el usuario
+                let message = messages[currentMessage].replace(/@username/g, username);
+
+                hackTextDiv.textContent += message; // Añadir el nuevo mensaje al texto existente
+                currentMessage++;
+
+                let delay = Math.random() * 2000 + 1000; // Tiempo aleatorio entre mensajes
+                setTimeout(showNextMessage, delay);
+            } else {
+                // Cuando los mensajes terminan, ocultar la barra de progreso
+                document.getElementById("progress").style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+
